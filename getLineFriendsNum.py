@@ -2,17 +2,23 @@ import requests
 from datetime import datetime, timedelta
 import mysql.connector
 import time
+import os
+from pathlib import Path
+from dotenv import load_dotenv
 
+# 載入.env檔案（上一層目錄）
+env_path = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(dotenv_path=env_path)
 
-# LINE Channel Access Token（請妥善保管！）
-ACCESS_TOKEN = 'P3WirIPavltznNhHOg2HwcCYlkxnVB9usDYNMWXvF07wwOSrKoLTqebIDGjsgQ/ROOm0lqrc0pm5vcl/td1z4TyRr+oEXGbydIsQMHxpMnMtZk6wwTlrw7nFv7nPkt2+p3mdy+ulNMIx1Wic3CHi71GUYhWQfeY8sLGRXgo3xvw='
+# LINE Channel Access Token（從.env讀取）
+ACCESS_TOKEN = os.getenv("LINE_ACCESS_TOKEN")
 
-# MySQL連線設定
+# MySQL連線設定（從.env讀取）
 MYSQL_CONFIG = {
-    'host': '34.136.7.211',
-    'user': 'a1251chu',
-    'password': 'Skc6168jemq0!~!',
-    'database': 'ragic_database'
+    'host': os.getenv("MYSQL_HOST"),
+    'user': os.getenv("MYSQL_USER"),
+    'password': os.getenv("MYSQL_PASSWORD"),
+    'database': os.getenv("MYSQL_DATABASE")
 }
 
 headers = {
